@@ -1,21 +1,17 @@
 <?php
-require_once("konf.php");
+require_once("funktsioonid.php");
 global $yhendus;
 if(!empty($_REQUEST["korras_id"])){
-    $kask=$yhendus->prepare(
-        "UPDATE jalgrattaeksam SET slaalom=1 WHERE id=?");
-    $kask->bind_param("i", $_REQUEST["korras_id"]);
-    $kask->execute();
+    slaalomKorras($_REQUEST["korras_id"]);
 }
 if(!empty($_REQUEST["vigane_id"])){
-    $kask=$yhendus->prepare(
-        "UPDATE jalgrattaeksam SET slaalom=2 WHERE id=?");
-    $kask->bind_param("i", $_REQUEST["vigane_id"]);
-    $kask->execute();
+    slaalomVigane($_REQUEST["vigane_id"]);
 }
-$kask=$yhendus->prepare("SELECT id, eesnimi, perekonnanimi   FROM jalgrattaeksam WHERE teooriatulemus>=9 AND slaalom=-1");  $kask->bind_result($id, $eesnimi, $perekonnanimi);
+$kask=$yhendus->prepare("SELECT id, eesnimi, perekonnanimi   FROM jalgrattaeksam WHERE teooriatulemus>9 AND slaalom=-1");  $kask->bind_result($id, $eesnimi, $perekonnanimi);
 $kask->execute();
+
 ?>
+
 <!doctype html>
 <html>
 <head>
