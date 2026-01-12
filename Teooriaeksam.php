@@ -1,37 +1,11 @@
 <?php
-require_once("konf.php");
+require_once("funktsioonid.php");
 global $yhendus;
 
 // Если введён результат теории
 if (!empty($_REQUEST["teooriatulemus"])) {
-    $id = $_REQUEST["id"];
-    $tulemus = $_REQUEST["teooriatulemus"];
-
-    // Сохраняем результат теории
-    $kask = $yhendus->prepare(
-        "UPDATE jalgrattaeksam SET teooriatulemus=? WHERE id=?"
-    );
-    $kask->bind_param("ii", $tulemus, $id);
-    $kask->execute();
-
-
-    if ($tulemus < 10) {
-        $kask2 = $yhendus->prepare(
-            "UPDATE jalgrattaeksam 
-             SET slaalom=1, ringtee=1, t2nav=1, luba=1 
-             WHERE id=?"
-        );
-        $kask2->bind_param("i", $id);
-        $kask2->execute();
-    }
+    teooriatulemus($_REQUEST["id"], $_REQUEST["teooriatulemus"]);
 }
-
-// Выбираем пользователей, которые ещё не проходили теорию
-$kask = $yhendus->prepare(
-    "SELECT id, eesnimi, perekonnanimi FROM jalgrattaeksam WHERE teooriatulemus=-1"
-);
-$kask->bind_result($id, $eesnimi, $perekonnanimi);
-$kask->execute();
 ?>
 
 <!doctype html>
@@ -61,19 +35,7 @@ $kask->execute();
         <th>Tulemus</th>
     </tr>
     <?php
-    while($kask->fetch()){
-        echo " 
- <td>$eesnimi</td> 
- <td>$perekonnanimi</td> 
- <td><form action=''> 
- <input type='hidden' name='id' value='$id' /> 
- <input type='text' name='teooriatulemus' />
- <input type='submit' value='Sisesta tulemus' /> 
- </form> 
- </td> 
-</tr> 
- ";
-    }
+kuvatabel();
     ?>
 </table>
 </body>
