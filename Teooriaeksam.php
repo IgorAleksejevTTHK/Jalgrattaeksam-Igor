@@ -29,11 +29,16 @@ $kask->execute();
     </ul>
 </nav>
 <body>
+
 <table>
+    <tr>
+        <th>Eesnimi</th>
+        <th>Perekonnanimi</th>
+        <th>Tulemus</th>
+    </tr>
     <?php
     while($kask->fetch()){
         echo " 
- <tr> 
  <td>$eesnimi</td> 
  <td>$perekonnanimi</td> 
  <td><form action=''> 
