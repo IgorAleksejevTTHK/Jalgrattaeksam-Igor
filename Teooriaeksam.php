@@ -13,8 +13,21 @@ $kask->execute();
 <!doctype html>
 <html>
 <head>
+    <link rel="stylesheet" href="style.css">
     <title>Teooriaeksam</title>
+
 </head>
+<nav>
+    <ul>
+        <li><a href="main.php">Avaleht</a></li>
+        <li><a href="registreerimine.php">Registreerimine</a></li>
+        <li><a href="Teooriaeksam.php">Teooriaeksam</a></li>
+        <li><a href="Slaalom.php">Slaloom</a></li>
+        <li><a href="Ringtee.php">Ringtee</a></li>
+        <li><a href="Tänav.php">Tänavasõit</a></li>
+        <li><a href="Lubadeleht.php">Lubade leht</a></li>
+    </ul>
+</nav>
 <body>
 <table>
     <?php
